@@ -1,0 +1,32 @@
+version: '3'
+services:
+  api:
+    build:
+      context: .
+      dockerfile: ./docker/api/Dockerfile
+    ports:
+      - "5000:5000"
+  mock-1:
+    build:
+      context: .
+      dockerfile: ./docker/mock/Dockerfile
+      args:
+        FLASK_RUN_PORT: 5001
+    ports:
+      - "5002:5002"
+  mock-2:
+    build:
+      context: .
+      dockerfile: ./docker/mock/Dockerfile
+      args:
+        FLASK_RUN_PORT: 5002
+    ports:
+      - "5003:5003"
+  mock-3:
+    build:
+      context: .
+      dockerfile: ./docker/mock/Dockerfile
+      args:
+        FLASK_RUN_PORT: 5003
+    ports:
+      - "5001:5001"

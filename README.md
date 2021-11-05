@@ -2,27 +2,34 @@
 
 Example insurance policy reconciliation API
 
-## Building the API
-
-This project assumes you have docker configured and running in your local environment.
-
-`
-docker build -t coderbyte-challenge:latest .
-`
-
 ## Running the API
 
+This project assumes you have docker and docker compose running in your local
+environment.
+
+#### Just the API
+
 `
-docker run -p 5000:5000 coderbyte-challenge:latest
+docker-compose up api
 `
 
-## Using the API locally
+#### The API and mock upstream services
 
-```
+`
+docker-compose up
+`
+
+## Calling the API locally
+
+**Using an average coalesce strategy**
+
+`
 curl -X POST http://localhost:5000/api/fetch-polices/1
-   -H 'Content-Type: application/json'
-   -d '{"deductible": "MIN", "oop_max": "MIN", "stop_loss": "MIN"}'
-```
+`
+
+**Using a custom coalesce strategy**
+
+> ```curl -X POST http://localhost:5000/api/fetch-polices/1 -H 'Content-Type: application/json' -d '{"deductible": "MIN", "oop_max": "MIN", "stop_loss": "MIN"}'```
 
 ## Local Development
 
@@ -31,7 +38,7 @@ Python and pip are required for local development.
 Using a virtual_env is also typically a good idea.
 
 ```
-pip install requirements.txt 
+pip install -r api/requirements.txt 
 python -m api.app
 ```
 
@@ -42,6 +49,8 @@ python -m api.app
 ## TODO
 
 - Handling external server errors or malformed data
+
+- Integration tests
 
 - Fetch the policy responses in parallel
 

@@ -1,6 +1,7 @@
-# tuples offer some component of immutability to prevent the app from changing upstream APIs
+# tuples offer some component of immutability to prevent the app from
+# accidentally changing upstream APIs
 POLICY_APIS = (
-    'https://api1.com',
-    'https://api2.com',
-    'https://api3.com',
+    'http://mock-1:5001/policies',
+    'http://mock-2:5002/policies',
+    'http://mock-3:5003/policies',
 )

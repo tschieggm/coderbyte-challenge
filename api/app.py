@@ -1,3 +1,5 @@
+import json
+
 from flask import Flask, request
 
 from api import policy, fetch, settings
@@ -25,7 +27,14 @@ def fetch_polices(member_id: int):
     else:
         strategy = policy.CoalesceStrategy.default()
 
-    return policy.coalesce_limits(limits, strategy)
+    coalesced_policy_limits = policy.coalesce_limits(limits, strategy)
+
+    response = app.response_class(
+        response=json.dumps(coalesced_policy_limits),
+        status=200,
+        mimetype='application/json'
+    )
+    return response
 
 
 if __name__ == '__main__':
