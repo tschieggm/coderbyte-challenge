@@ -1,7 +1,7 @@
-FROM python:3.8-slim-buster
+FROM python:3.8-slim
 
 # Copy the requirements.txt first to leverage Docker cache
-COPY ./api/requirements.txt /app/requirements.txt
+COPY ./requirements.txt /app/requirements.txt
 
 WORKDIR /app
 RUN pip install -r requirements.txt

@@ -19,6 +19,12 @@ docker-compose up api
 docker-compose up
 `
 
+### Cleaning up
+
+`
+docker-compose down --rmi all
+`
+
 ## Calling the API locally
 
 **Using an average coalesce strategy**
@@ -38,7 +44,7 @@ Python and pip are required for local development.
 Using a virtual_env is also typically a good idea.
 
 ```
-pip install -r api/requirements.txt 
+pip install -r requirements.txt 
 python -m api.app
 ```
 

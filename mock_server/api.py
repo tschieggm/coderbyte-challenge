@@ -17,9 +17,9 @@ def policies():
     member_id = int(request.args.get('member_id'))
     # return mock randomly generated data, use the member_id as a multiplier
     data = {
-        'deductible': (randrange(400) * member_id),
-        'stop_loss': (randrange(1000) * member_id),
-        'oop_max': (randrange(500) * member_id)
+        'deductible': (randrange(10) * member_id),
+        'oop_max': (randrange(1000) * member_id),
+        'stop_loss': (randrange(10000) * member_id),
     }
 
     response = app.response_class(

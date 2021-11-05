@@ -1,9 +1,9 @@
-FROM python:3.8-slim-buster
+FROM python:3.8-slim
 ARG FLASK_RUN_PORT
 ENV FLASK_RUN_PORT $FLASK_RUN_PORT
 
 # Copy the requirements.txt first to leverage Docker cache
-COPY ./mock_server/requirements.txt /app/requirements.txt
+COPY ./requirements.txt /app/requirements.txt
 
 WORKDIR /app
 RUN pip install -r requirements.txt
