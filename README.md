@@ -16,6 +16,14 @@ docker build -t coderbyte-challenge:latest .
 docker run -p 5000:5000 coderbyte-challenge:latest
 `
 
+## Using the API locally
+
+```
+curl -X POST http://localhost:5000/api/fetch-polices/1
+   -H 'Content-Type: application/json'
+   -d '{"deductible": "MIN", "oop_max": "MIN", "stop_loss": "MIN"}'
+```
+
 ## Local Development
 
 Python and pip are required for local development.
@@ -32,6 +40,8 @@ python -m api.app
 `python -m unittest discover`
 
 ## TODO
+
+- Handling external server errors or malformed data
 
 - Fetch the policy responses in parallel
 
