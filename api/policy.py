@@ -1,4 +1,3 @@
-
 from enum import Enum
 
 
@@ -13,7 +12,7 @@ class Aggregation(Enum):
 
 
 # this assumes limit types will not change frequently
-# the enum value is what the API uses for external object access
+# the values in this enum are tightly coupled to external API responses!
 class LimitType(Enum):
     DEDUCTIBLE = 'deductible'
     STOP_LOSS = 'stop_loss'
@@ -98,6 +97,7 @@ def aggregate_single_policy_limit(policy_limits: list, limit_type: LimitType,
     :return: A single value representing the aggregated limit across all
     policies
     """
+    # pluck a list of all limit values for a given limit_type
     limit_values = [p[limit_type.value] for p in policy_limits]
 
     if agg == Aggregation.MIN:
@@ -123,7 +123,7 @@ def coalesce_limits(policy_limits: list, strategy: CoalesceStrategy):
     """
     coalesced_policy = {}
 
-    # all other limit types will be dropped from supplies policy_limits list
+    # all other extraneous types will be dropped from the supplied policy_limits
     for limit_type in LimitType:
         aggregation = strategy[limit_type]
         limit_val = aggregate_single_policy_limit(policy_limits, limit_type,

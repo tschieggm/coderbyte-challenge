@@ -19,15 +19,16 @@ def health() -> str:
 
 @app.route('/api/fetch-polices/<int:member_id>', methods=['POST'])
 def fetch_polices(member_id: int):
-    limits = fetch.member_policy_limits(member_id, settings.POLICY_APIS)
+    all_limits = fetch.member_policy_limits(member_id, settings.POLICY_APIS)
 
     request_body = request.json
     if request_body:
+        # TODO: improve HTTP response codes on validation exceptions
         strategy = policy.CoalesceStrategy.parse_strategy_object(request_body)
     else:
         strategy = policy.CoalesceStrategy.default()
 
-    coalesced_policy_limits = policy.coalesce_limits(limits, strategy)
+    coalesced_policy_limits = policy.coalesce_limits(all_limits, strategy)
 
     response = app.response_class(
         response=json.dumps(coalesced_policy_limits),
